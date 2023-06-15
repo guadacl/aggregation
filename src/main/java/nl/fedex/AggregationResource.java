@@ -1,6 +1,8 @@
 package nl.fedex;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -32,14 +34,19 @@ public class AggregationResource {
     		
     //	}).coll
     	
-    	var ret1 = trackProxy.getShipmentProducts(109347263);
+    	Map<String, List<String>> map = new HashMap<>();
+    	shipmentsOrderNumber.stream().forEach(a->map.put(a.toString(), trackProxy.getShipmentProducts(a)));
     	
+    	
+    	
+    	var ret1 = trackProxy.getShipmentProducts(109347263);
     	var ret2 = trackProxy.getPricing("109347263");
     	var ret3 = trackProxy.getTrackStatus(109347263);
     	System.out.println(ret1);
     	System.out.println(ret2);
     	System.out.println(ret3);
     	
-        return Response.status(200).entity(new Aggregation()).build();
+    	Aggregation aaa = new Aggregation(map);
+        return Response.status(200).entity(aaa).build();
     }
 }
