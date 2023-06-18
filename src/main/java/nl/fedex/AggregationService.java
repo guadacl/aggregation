@@ -19,6 +19,7 @@ public class AggregationService {
     public Aggregation getAggregation(List<Integer> shipmentsOrderNumbers,
                                       List<Integer> trackOrderNumbers,
                                       List<String> pricingCountryCodes){
-        return new Aggregation(pricing.getJsonObject(pricingCountryCodes),shipment.getJsonObject(shipmentsOrderNumbers),track.getJsonObject(trackOrderNumbers));
+        return new Aggregation(pricing.getJsonObject(pricingCountryCodes),shipment.getJsonObject(shipmentsOrderNumbers),
+                track.getJsonObject(trackOrderNumbers));
     }
 }

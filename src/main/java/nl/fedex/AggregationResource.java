@@ -20,9 +20,8 @@ public class AggregationResource {
     public Response getAggregation(
     		 @QueryParam("shipmentsOrderNumbers") List<Integer> shipmentsOrderNumber,
     		 @QueryParam("trackOrderNumbers") List<Integer> trackOrderNumbers,
-    		 @QueryParam("pricingCountryCodes") List<String> pricingCountryCodes
-    		) {
-    	
+    		 @QueryParam("pricingCountryCodes") List<String> pricingCountryCodes) {
+
         return Response.status(200).entity(service.getAggregation(shipmentsOrderNumber
 		,trackOrderNumbers,pricingCountryCodes)).build();
     }
