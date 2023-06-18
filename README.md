@@ -6,7 +6,14 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Running the application in dev mode
 
-You can run your application in dev mode that enables live coding using:
+1. Use the provided implementation of those
+services as a Docker image which is available at Docker Hub https://hub.docker.com/r/qwkz/
+backend-services/tags
+To run the backend services locally (to use them to implement the solution), use the following
+command: docker container run --publish 4000:4000 qwkz/backend-services:latest.
+
+
+2. You can run your application in dev mode that enables live coding using:
 ```shell script
 ./mvnw compile quarkus:dev
 ```
