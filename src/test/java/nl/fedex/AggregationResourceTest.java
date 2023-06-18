@@ -5,50 +5,59 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.*;
 
 @QuarkusTest
 public class AggregationResourceTest {
 
-    @Test
-    public void testAggregationEndpoint() {
-//        given()
-//          .when().get("/aggregation")
-//          .then()
-//             .statusCode(200)
-  //           .body(is("Hello from RESTEasy Reactive")).
-    //         log()
-      //       .all();
-        
-        //Log.info("as string");
-        System.out.println((given().
-          when().get("/aggregation")
-        		.getBody().asString()));
-        
-    }
 
     @Test
-    public void testQuery() {
-//        given()
-//          .when().get("/aggregation")
-//          .then()
-//             .statusCode(200)
-        //           .body(is("Hello from RESTEasy Reactive")).
-        //         log()
-        //       .all();
-
-        //Log.info("as string");
+    public void testJson(){
         given()
-                .queryParam("shipmentsOrderNumber", "987654321")
-                .queryParam("shipmentsOrderNumber", "123456789")
+                . when().get("/aggregation")
+        .then()
+                .body("$", hasKey("shipments"))
+                .body("$", hasKey("pricing"))
+                .body("$", hasKey("track"))
+                .body("$", not(hasKey("shipments.987654321")));
+    }
+    @Test
+    public void testQue() {
+        System.out.println((given().
+                when().get("/aggregation")
+                .getBody().asString()));
+
+        given()
+                .queryParam("shipmentsOrderNumbers", "987654321")
+                .queryParam("shipmentsOrderNumbers", "123456789")
                 .queryParam("trackOrderNumbers", "987654321")
                 .queryParam("trackOrderNumbers", "123456789")
                 .queryParam("pricingCountryCodes", "NL")
                 .queryParam("pricingCountryCodes", "CN")
                 . when().get("/aggregation")
           .then()
-             .statusCode(200).log().all();
-               // .getBody().asString()));
+             .statusCode(200)
+                .log()
+               .all();
 
     }
+    @Test
+    public void testQuery2() {
+        System.out.println((given().
+                when().get("/aggregation")
+                .getBody().asString()));
+
+        given()
+                .queryParam("shipmentsOrderNumbers", "987654321")
+                .queryParam("shipmentsOrderNumbers", "123456789")
+                . when().get("/aggregation")
+                .then()
+                .statusCode(200)
+                .log()
+                .all();
+
+    }
+
 
 }

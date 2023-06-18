@@ -18,8 +18,7 @@ public class AggregationResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAggregation(
-			@QueryParam("pippo") List<Integer> pippo,
-    		 @QueryParam("shipmentsOrderNumber") List<Integer> shipmentsOrderNumber,
+    		 @QueryParam("shipmentsOrderNumbers") List<Integer> shipmentsOrderNumber,
     		 @QueryParam("trackOrderNumbers") List<Integer> trackOrderNumbers,
     		 @QueryParam("pricingCountryCodes") List<String> pricingCountryCodes
     		) {

@@ -4,29 +4,29 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ApplicationScoped
+@lombok.extern.slf4j.Slf4j
 public class AggregationService {
     @Inject
     @RestClient
-    TrackProxy trackProxy;
+    FedExProxy proxy;
 
-    public Aggregation getAggregation(List<Integer> shipmentsOrderNumber,
+
+    public Aggregation getAggregation(List<Integer> shipmentsOrderNumbers,
                                       List<Integer> trackOrderNumbers,
                                       List<String> pricingCountryCodes){
 
-        AggregationsClient shipment = trackProxy::getShipmentProducts;
-        var shipments = shipment.getJsonObject(shipmentsOrderNumber);
+        AggregationsClient shipment = proxy::getShipmentProducts;
+        var shipments = shipment.getJsonObject(shipmentsOrderNumbers);
 
-        AggregationClient<Integer> track = trackProxy::getTrackStatus;
+        AggregationClient<Integer> track = proxy::getTrackStatus;
         var tracks = track.getJsonObject(trackOrderNumbers);
 
-        AggregationClient<String> pricing = trackProxy::getPricing;
+        AggregationClient<String> pricing = proxy::getPricing;
         var pricings = pricing.getJsonObject(pricingCountryCodes);
 
-        return new Aggregation(shipments,tracks,pricings);
+        return new Aggregation(pricings,shipments,tracks);
     }
 }

@@ -1,17 +1,16 @@
 package nl.fedex;
 
-import java.util.List;
-
-import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+
+import java.util.List;
 
 @RegisterRestClient
-public interface TrackProxy {
+public interface FedExProxy {
 
   @GET
   @Path("/shipment-products")
@@ -19,6 +18,7 @@ public interface TrackProxy {
 
   @GET
   @Path("/track-status")
+  @Produces(MediaType.APPLICATION_JSON)
   String getTrackStatus(@QueryParam("orderNumber") Integer orderNumber);
 
   @GET

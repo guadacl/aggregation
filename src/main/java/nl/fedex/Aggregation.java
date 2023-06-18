@@ -1,5 +1,6 @@
 package nl.fedex;
 
+import jakarta.json.bind.annotation.JsonbProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,10 +18,10 @@ Root root = om.readValue(myJsonString, Root.class); */
 @AllArgsConstructor
 public class Aggregation {
 
+ private Map<String, String> pricing;
  private Map<String, List<String>> shipments;
  private Map<String, String> track;
- private Map<String, String> pricing;
- 
+
 }
 
 
