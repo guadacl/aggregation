@@ -12,21 +12,13 @@ public class AggregationService {
     @Inject
     @RestClient
     FedExProxy proxy;
-
+    AggregationsClient shipment = proxy::getShipmentProducts;
+    AggregationClient<Integer> track = proxy::getTrackStatus;
+    AggregationClient<String> pricing = proxy::getPricing;
 
     public Aggregation getAggregation(List<Integer> shipmentsOrderNumbers,
                                       List<Integer> trackOrderNumbers,
                                       List<String> pricingCountryCodes){
-
-        AggregationsClient shipment = proxy::getShipmentProducts;
-        var shipments = shipment.getJsonObject(shipmentsOrderNumbers);
-
-        AggregationClient<Integer> track = proxy::getTrackStatus;
-        var tracks = track.getJsonObject(trackOrderNumbers);
-
-        AggregationClient<String> pricing = proxy::getPricing;
-        var pricings = pricing.getJsonObject(pricingCountryCodes);
-
-        return new Aggregation(pricings,shipments,tracks);
+        return new Aggregation(pricing.getJsonObject(pricingCountryCodes),shipment.getJsonObject(shipmentsOrderNumbers),track.getJsonObject(trackOrderNumbers));
     }
 }
