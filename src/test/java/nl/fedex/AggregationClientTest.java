@@ -2,12 +2,9 @@ package nl.fedex;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static javax.swing.UIManager.get;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AggregationClientTest {
@@ -29,7 +26,7 @@ class AggregationClientTest {
     }
 
     @Test
-    void getJsonObject_503() {
+    void getJsonObject_no_present() {
         assertNotEquals(TRANSIT ,tracks.get("2"));
     }
 }
