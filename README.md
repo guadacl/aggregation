@@ -16,6 +16,10 @@ command: docker container run --publish 4000:4000 qwkz/backend-services:latest.
 2. You can run your application in dev mode that enables live coding using:
 ```shell script
 ./mvnw compile quarkus:dev
+GET 
+http://localhost:8888/aggregation?shipmentsOrderNumbers=987654321&trackOrderNumbers=987654321&pricingCountryCodes=NL
+http://localhost:8888/aggregation?shipmentsOrderNumbers=987654321&shipmentsOrderNumbers=123456789&trackOrderNumbers=987654321&trackOrderNumbers=123456789&pricingCountryCodes=NL&pricingCountryCodes=CN
+
 ```
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.

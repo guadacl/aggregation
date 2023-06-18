@@ -4,8 +4,6 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.*;
 
 @QuarkusTest
@@ -23,11 +21,7 @@ public class AggregationResourceTest {
                 .body("$", not(hasKey("shipments.987654321")));
     }
     @Test
-    public void testQue() {
-        System.out.println((given().
-                when().get("/aggregation")
-                .getBody().asString()));
-
+    public void testQueryParameters() {
         given()
                 .queryParam("shipmentsOrderNumbers", "987654321")
                 .queryParam("shipmentsOrderNumbers", "123456789")
@@ -43,11 +37,7 @@ public class AggregationResourceTest {
 
     }
     @Test
-    public void testQuery2() {
-        System.out.println((given().
-                when().get("/aggregation")
-                .getBody().asString()));
-
+    public void testQuery() {
         given()
                 .queryParam("shipmentsOrderNumbers", "987654321")
                 .queryParam("shipmentsOrderNumbers", "123456789")
